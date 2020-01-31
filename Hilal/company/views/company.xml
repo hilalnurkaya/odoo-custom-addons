@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+ <!--tree view of the company model-->
+    <record id="company_tree" model="ir.ui.view">
+        <field name="name">Company</field>
+        <field name="model">fm.building</field>
+        <field name="arch" type="xml">
+            <tree string="Company">
+                <field name="structural_system"/>
+                <field name="office_area_as_mt_square"/>
+                <field name="under_root_area_as_meter"/>
+                <field name="under_root_area_as_feet"/>
+                <field name="building_ids"/>
+                <field name="active"/>
+            </tree>
+        </field>
+     </record>
+
+    <!--form view of the doctor model-->
+    <record id="company_form" model="ir.ui.view">
+        <field name="name">Company Form</field>
+        <field name="model">fm.building</field>
+        <field name="arch" type="xml">
+            <form string="Company">
+                <sheet>
+                    <group>
+                        <group>
+                            <field  name="building_name"/>
+                            <field  name="building_no"/>
+                            <field  name="building_dimension"/>
+                            <field  name="construction_year"/>
+                            <field  name="structural_system"/>
+                        </group>
+                        <group>
+                            <field  name="office_area_as_mt_square"/>
+                            <field  name="under_root_area_as_meter"/>
+                            <field  name="under_root_area_as_feet"/>
+                            <field  name="active"/>
+                        </group>
+                        <group>
+                            <field  name="building_ids"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+     </record>
+
+    <!--tree view of the employee model-->
+    <record id="employee_tree" model="ir.ui.view">
+        <field name="name">Employee</field>
+        <field name="model">employee.building.assignment</field>
+        <field name="arch" type="xml">
+            <tree string="Employee">
+                <field name="building_id"/>
+                <field name="employee_id"/>
+                <field name="assignment_start_date"/>
+                <field name="assignment_end_date"/>
+            </tree>
+        </field>
+     </record>
+
+    <!--form view of the employee model-->
+    <record id="employee_form" model="ir.ui.view">
+        <field name="name">Employee Form</field>
+        <field name="model">employee.building.assignment</field>
+        <field name="arch" type="xml">
+            <form string="Employee">
+                <sheet>
+                    <group>
+                        <group>
+                            <field  name="building_id" options="{'no_create_edit': True}" />
+                            <field  name="employee_id" options="{'no_create_edit': True}" />
+                            <field  name="assignment_start_date"/>
+                            <field  name="assignment_end_date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+     </record>
+
+    <!--action of the appointment menu-->
+    <record id="action_building" model="ir.actions.act_window">
+        <field name="name">Buildings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">fm.building</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create your First Appointment !
+          </p>
+        </field>
+    </record>
+
+    <!--action of the patients menu-->
+    <record id="action_employee" model="ir.actions.act_window">
+        <field name="name">Employee</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">employee.building.assignment</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <record id="view_company_emp" model="ir.ui.view">
+        <field name="name">Company Filters</field>
+        <field name="model">fm.building</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="building_name"/>
+                <filter name="filter_inactive"
+                        string="Inactive"
+                        domain="[('active','=',True)]"/>
+                <filter name="filter_active"
+                        string="Active"
+                        domain="[('active','=',False)]"/>
+            </search>
+        </field>
+    </record>
+</odoo>
+
